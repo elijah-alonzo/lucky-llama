@@ -7,7 +7,7 @@ import SpinWheel from '../components/SpinWheel';
 import FloatingInput from '../components/FloatingInput';
 
 export default function Roulette() {
-  const [wheelItems, setWheelItems] = useState<string[]>(['Option 1', 'Option 2', 'Option 3', 'Option 4']);
+  const [wheelItems, setWheelItems] = useState<string[]>([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<string>('');
   const [winnerIndex, setWinnerIndex] = useState<number | null>(null);
@@ -114,7 +114,6 @@ export default function Roulette() {
                     ref={wheelRef}
                     items={wheelItems}
                     isSpinning={isSpinning}
-                    winnerIndex={winnerIndex}
                   />
                 </div>
               </div>

@@ -6,14 +6,13 @@ import Image from 'next/image';
 interface SpinWheelProps {
   items: string[];
   isSpinning: boolean;
-  winnerIndex?: number | null;
 }
 
 interface SpinWheelRef {
   spinToIndex: (index: number) => void;
 }
 
-const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning, winnerIndex }, ref) => {
+const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning }, ref) => {
   const [rotation, setRotation] = useState(0);
 
   // Spin to a specific index so the pointer lands on the winner
@@ -48,7 +47,7 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning,
     return colors[index % colors.length];
   };
 
-  const getTextColor = (bgColor: string) => {
+  const getTextColor = () => {
     // Return white text for better visibility on all colors
     return '#ffffff';
   };
@@ -145,7 +144,7 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning,
         <svg className="w-full h-full" viewBox="0 0 320 320">
           {items.map((item, index) => {
             const segmentColor = getSegmentColor(index);
-            const textColor = getTextColor(segmentColor);
+            const textColor = getTextColor();
             const textPos = getTextPosition(index);
             
             return (

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 interface FloatingInputProps {
   isVisible: boolean;
@@ -46,17 +47,9 @@ export default function FloatingInput({ isVisible, onToggle, currentItems, onUpd
       {isVisible && (
         <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-40 p-4">
           <div 
-            className="w-full max-w-md rounded-2xl shadow-2xl max-h-96 flex flex-col border-4 relative"
+            className="w-full max-w-md rounded-2xl shadow-2xl max-h-96 flex flex-col border-4"
             style={{ backgroundColor: '#371843', borderColor: '#fffd30' }}
           >
-            {/* Back Button */}
-            <a
-              href="/"
-              className="absolute top-4 left-4 px-4 py-2 rounded-lg font-semibold border-2 border-yellow-400 text-yellow-400 bg-transparent hover:bg-yellow-400 hover:text-[#371843] transition-all"
-              style={{ zIndex: 10 }}
-            >
-              &#8592; Back
-            </a>
             {/* Header */}
             <div className="p-6 border-b border-gray-600">
               <h3 className="text-xl font-bold text-white mb-2">

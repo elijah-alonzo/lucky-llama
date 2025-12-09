@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [, setActiveSection] = useState('home');
 
   const scrollToGameModes = () => {
     setActiveSection('gamemodes');
