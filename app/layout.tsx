@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Lucky Llama - Interactive Party Games & Random Decision Maker",
+  title: "Lucky Llama",
   description: "Lucky Llama provides interactive ways for randomizing and making party games exciting. Features Rolling Roulette, Capricious Cards, Blithe Bottle, and Spinning Slots.",
 };
 

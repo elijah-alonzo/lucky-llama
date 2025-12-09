@@ -73,12 +73,9 @@ export default function Roulette() {
             {/* Left Content */}
             <div className="text-left w-full max-w-xl mx-auto">
               <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                <span className="text-white">Rolling </span>
-                <span style={{ color: '#fffd30' }}>Roulette</span>
+                <span className="text-white">Lucky </span>
+                <span style={{ color: '#fffd30' }}>Llama</span>
               </h1>
-              <p className="text-base text-gray-300 mb-8 max-w-lg leading-relaxed">
-                Spin the wheel to make random selections from your custom list. Perfect for party games and decision making!
-              </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <button
