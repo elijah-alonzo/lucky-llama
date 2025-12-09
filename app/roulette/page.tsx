@@ -10,25 +10,23 @@ export default function Roulette() {
   const [wheelItems, setWheelItems] = useState<string[]>(['Option 1', 'Option 2', 'Option 3', 'Option 4']);
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<string>('');
+  const [winnerIndex, setWinnerIndex] = useState<number | null>(null);
   const [showInput, setShowInput] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const wheelRef = useRef<{ spin: () => void }>(null);
+  const wheelRef = useRef<{ spinToIndex: (index: number) => void }>(null);
 
   const handleSpin = () => {
     if (wheelItems.length === 0) return;
-    
     setIsSpinning(true);
     setWinner('');
     setShowModal(false);
-    
+    const randomIndex = Math.floor(Math.random() * wheelItems.length);
+    setWinnerIndex(randomIndex);
+    setWinner(wheelItems[randomIndex]);
     if (wheelRef.current) {
-      wheelRef.current.spin();
+      wheelRef.current.spinToIndex(randomIndex);
     }
-    
-    // Simulate spin duration
     setTimeout(() => {
-      const randomIndex = Math.floor(Math.random() * wheelItems.length);
-      setWinner(wheelItems[randomIndex]);
       setIsSpinning(false);
       setShowModal(true);
     }, 4000);
@@ -70,9 +68,9 @@ export default function Roulette() {
       {/* Main Content */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Content */}
-            <div className="text-left">
+            <div className="text-left w-full max-w-xl mx-auto">
               <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
                 <span className="text-white">Rolling </span>
                 <span style={{ color: '#fffd30' }}>Roulette</span>
@@ -109,13 +107,16 @@ export default function Roulette() {
             </div>
 
             {/* Right Content - Wheel */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative">
-                <SpinWheel 
-                  ref={wheelRef}
-                  items={wheelItems} 
-                  isSpinning={isSpinning}
-                />
+            <div className="flex justify-center lg:justify-end w-full">
+              <div className="relative w-full flex justify-center">
+                <div className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[550px] aspect-square">
+                  <SpinWheel 
+                    ref={wheelRef}
+                    items={wheelItems}
+                    isSpinning={isSpinning}
+                    winnerIndex={winnerIndex}
+                  />
+                </div>
               </div>
             </div>
           </div>

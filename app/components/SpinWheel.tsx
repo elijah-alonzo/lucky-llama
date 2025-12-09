@@ -6,35 +6,51 @@ import Image from 'next/image';
 interface SpinWheelProps {
   items: string[];
   isSpinning: boolean;
+  winnerIndex?: number | null;
 }
 
-export interface SpinWheelRef {
-  spin: () => void;
+interface SpinWheelRef {
+  spinToIndex: (index: number) => void;
 }
 
-const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning }, ref) => {
+const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning, winnerIndex }, ref) => {
   const [rotation, setRotation] = useState(0);
 
+  // Spin to a specific index so the pointer lands on the winner
   useImperativeHandle(ref, () => ({
-    spin: () => {
-      const randomRotation = Math.floor(Math.random() * 360) + 720; // At least 2 full rotations
-      setRotation(prev => prev + randomRotation);
+    spinToIndex: (index: number) => {
+      const segmentAngle = 360 / Math.max(items.length, 1);
+      const extraSpins = 5; // 5 full spins for anticipation
+      
+      // Calculate the center angle of the winner segment
+      // Segments start at 0° and go clockwise, so winner center is at:
+      const winnerCenterAngle = index * segmentAngle + segmentAngle / 2;
+      
+      // Current rotation normalized to 0-360 range
+      const currentNormalizedRotation = rotation % 360;
+      
+      // Target angle: bring winner to top (360 - winnerCenterAngle for counter-clockwise)
+      const targetAngle = 360 - winnerCenterAngle;
+      
+      // Final rotation: current base + extra spins + target adjustment
+      const finalRotation = rotation - currentNormalizedRotation + (extraSpins * 360) + targetAngle;
+      
+      setRotation(finalRotation);
     }
   }));
 
   // Generate colors for each segment
   const getSegmentColor = (index: number) => {
     const colors = [
-      '#4b2f53',
-      '#371843',
+      '#e74c3c', '#3498db', '#2ecc71', '#f39c12', 
+      '#9b59b6', '#1abc9c', '#e67e22', '#34495e'
     ];
     return colors[index % colors.length];
   };
 
   const getTextColor = (bgColor: string) => {
-    // Return dark text for light backgrounds, light text for dark backgrounds
-    const lightColors = ['#fffd30', '#ffeaa7', '#f7dc6f'];
-    return lightColors.includes(bgColor) ? '#371843' : '#ffffff';
+    // Return white text for better visibility on all colors
+    return '#ffffff';
   };
 
   // Calculate segment angle
@@ -43,7 +59,8 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
   // Create SVG path for each segment
   const createSegmentPath = (index: number) => {
     const angle = segmentAngle;
-    const startAngle = index * angle;
+    // Start from -90 degrees (12 o'clock position) and go clockwise
+    const startAngle = -90 + index * angle;
     const endAngle = startAngle + angle;
     
     const radius = 160;
@@ -63,7 +80,8 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
   // Calculate text position
   const getTextPosition = (index: number) => {
     const angle = segmentAngle;
-    const midAngle = (index * angle + angle / 2) * Math.PI / 180;
+    // Start from -90 degrees (12 o'clock position) and go clockwise
+    const midAngle = (-90 + index * angle + angle / 2) * Math.PI / 180;
     const textRadius = 100;
     const centerX = 160;
     const centerY = 160;
@@ -71,7 +89,14 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
     const x = centerX + textRadius * Math.cos(midAngle);
     const y = centerY + textRadius * Math.sin(midAngle);
     
-    return { x, y, rotation: (index * angle + angle / 2) };
+    // Text rotation for readability
+    let textRotation = -90 + index * angle + angle / 2;
+    // If text would be upside down, rotate it 180 degrees
+    if (textRotation > 90 && textRotation < 270) {
+      textRotation += 180;
+    }
+    
+    return { x, y, rotation: textRotation };
   };
 
   if (items.length === 0) {
@@ -82,7 +107,7 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
           style={{ borderColor: '#fffd30', backgroundColor: 'rgba(255, 253, 48, 0.1)' }}
         >
           <p className="text-white text-center px-8">
-            Add items to the wheel using the floating button below!
+            Add items to the wheel using the customize button!
           </p>
         </div>
       </div>
@@ -114,7 +139,7 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
         style={{ 
           borderColor: '#fffd30',
           transform: `rotate(${rotation}deg)`,
-          transition: isSpinning ? 'transform 3.5s cubic-bezier(0.23, 1, 0.32, 1)' : 'none'
+          transition: isSpinning ? 'transform 4s cubic-bezier(0.23, 1, 0.32, 1)' : 'none'
         }}
       >
         <svg className="w-full h-full" viewBox="0 0 320 320">
@@ -129,6 +154,8 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
                 <path
                   d={createSegmentPath(index)}
                   fill={segmentColor}
+                  stroke="#ffffff"
+                  strokeWidth="1"
                 />
                 
                 {/* Text */}
@@ -137,10 +164,12 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
                   y={textPos.y}
                   fill={textColor}
                   fontSize="10"
+                  fontWeight="500"
                   textAnchor="middle"
                   dominantBaseline="middle"
                   transform={`rotate(${textPos.rotation}, ${textPos.x}, ${textPos.y})`}
                   className="select-none"
+                  style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
                 >
                   {item.length > 8 ? `${item.substring(0, 8)}...` : item}
                 </text>
