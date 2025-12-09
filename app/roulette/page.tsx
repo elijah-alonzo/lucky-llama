@@ -10,7 +10,6 @@ export default function Roulette() {
   const [wheelItems, setWheelItems] = useState<string[]>([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<string>('');
-  const [winnerIndex, setWinnerIndex] = useState<number | null>(null);
   const [showInput, setShowInput] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const wheelRef = useRef<{ spinToIndex: (index: number) => void }>(null);
@@ -21,8 +20,10 @@ export default function Roulette() {
     setWinner('');
     setShowModal(false);
     const randomIndex = Math.floor(Math.random() * wheelItems.length);
-    setWinnerIndex(randomIndex);
     setWinner(wheelItems[randomIndex]);
+    if (wheelRef.current) {
+      wheelRef.current.spinToIndex(randomIndex);
+    }
     if (wheelRef.current) {
       wheelRef.current.spinToIndex(randomIndex);
     }
