@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
@@ -75,7 +76,7 @@ export default function Home() {
                   className="px-8 py-4 text-base font-semibold border-2 rounded-xl transition-all hover:shadow-lg"
                   style={{ borderColor: '#fffd30', color: '#fffd30' }}
                 >
-                  Support the Dev
+                  Meet the Dev
                 </button>
               </div>
 
@@ -130,9 +131,9 @@ export default function Home() {
                 <p className="certification-description">
                   A spinner that holds multiple text options. Perfect for making random selections from a list of choices.
                 </p>
-                <button className="certification-button">
+                <Link href="/roulette" className="certification-button block text-center no-underline">
                   Play Now
-                </button>
+                </Link>
               </div>
             </div>
 
