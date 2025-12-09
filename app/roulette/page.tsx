@@ -69,7 +69,7 @@ export default function Roulette() {
       {/* Main Content */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="text-left w-full max-w-xl mx-auto">
               <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
@@ -108,9 +108,9 @@ export default function Roulette() {
             </div>
 
             {/* Right Content - Wheel */}
-            <div className="flex justify-center lg:justify-end w-full">
+            <div className="flex justify-center lg:justify-end w-full px-4 sm:px-0">
               <div className="relative w-full flex justify-center">
-                <div className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[550px] aspect-square">
+                <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[500px] xl:max-w-[550px] aspect-square">
                   <SpinWheel 
                     ref={wheelRef}
                     items={wheelItems}

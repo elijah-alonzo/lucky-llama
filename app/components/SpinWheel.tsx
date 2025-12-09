@@ -100,12 +100,12 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
 
   if (items.length === 0) {
     return (
-      <div className="flex items-center justify-center w-96 h-96 mx-auto">
+      <div className="flex items-center justify-center w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl aspect-square mx-auto">
         <div 
-          className="w-80 h-80 rounded-full border-4 flex items-center justify-center"
+          className="w-4/5 aspect-square rounded-full border-4 flex items-center justify-center"
           style={{ borderColor: '#fffd30', backgroundColor: 'rgba(255, 253, 48, 0.1)' }}
         >
-          <p className="text-white text-center px-8">
+          <p className="text-white text-center px-4 text-sm sm:text-base">
             Add items to the wheel using the customize button!
           </p>
         </div>
@@ -114,13 +114,39 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
   }
 
   return (
-    <div className="flex items-center justify-center w-[480px] h-[480px] lg:w-[600px] lg:h-[600px] mx-auto relative">
+    <div className="flex items-center justify-center w-full aspect-square mx-auto relative max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl">
       {/* Pointer */}
       <div 
-        className="absolute top-6 left-1/2 transform -translate-x-1/2 z-10"
+        className="absolute top-2 sm:top-4 lg:top-6 left-1/2 transform -translate-x-1/2 z-10"
         style={{ width: '0', height: '0' }}
       >
+        {/* Mobile pointer */}
         <div 
+          className="block sm:hidden"
+          style={{
+            width: '0',
+            height: '0',
+            borderLeft: '12px solid transparent',
+            borderRight: '12px solid transparent',
+            borderTop: '24px solid #fffd30',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+          }}
+        />
+        {/* Tablet pointer */}
+        <div 
+          className="hidden sm:block lg:hidden"
+          style={{
+            width: '0',
+            height: '0',
+            borderLeft: '18px solid transparent',
+            borderRight: '18px solid transparent',
+            borderTop: '36px solid #fffd30',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+          }}
+        />
+        {/* Desktop pointer */}
+        <div 
+          className="hidden lg:block"
           style={{
             width: '0',
             height: '0',
@@ -134,7 +160,7 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
 
       {/* Wheel */}
       <div 
-        className={`w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] rounded-full border-6 lg:border-8 ${isSpinning ? 'wheel-spinning' : ''}`}
+        className={`w-[90%] aspect-square rounded-full border-4 sm:border-6 lg:border-8 ${isSpinning ? 'wheel-spinning' : ''}`}
         style={{ 
           borderColor: '#fffd30',
           transform: `rotate(${rotation}deg)`,
@@ -162,15 +188,15 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
                   x={textPos.x}
                   y={textPos.y}
                   fill={textColor}
-                  fontSize="10"
-                  fontWeight="500"
+                  fontSize="12"
+                  fontWeight="600"
                   textAnchor="middle"
                   dominantBaseline="middle"
                   transform={`rotate(${textPos.rotation}, ${textPos.x}, ${textPos.y})`}
                   className="select-none"
                   style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
                 >
-                  {item.length > 8 ? `${item.substring(0, 8)}...` : item}
+                  {item.length > 10 ? `${item.substring(0, 10)}...` : item}
                 </text>
               </g>
             );
@@ -180,15 +206,15 @@ const SpinWheel = forwardRef<SpinWheelRef, SpinWheelProps>(({ items, isSpinning 
 
       {/* Center Circle */}
       <div 
-        className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 lg:w-28 lg:h-28 rounded-full border-4 flex items-center justify-center"
+        className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 rounded-full border-4 flex items-center justify-center"
         style={{ backgroundColor: '#371843', borderColor: '#fffd30' }}
       >
         <Image
           src="/lucky-llama-logo.png"
           alt="Lucky Llama"
-          width={60}
-          height={60}
-          className="lg:w-16 lg:h-16 rounded-full object-contain"
+          width={40}
+          height={40}
+          className="sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-full object-contain"
         />
       </div>
     </div>
