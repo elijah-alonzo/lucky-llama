@@ -1,7 +1,8 @@
 {
-  "name": "boiler-plate-nextjs",
-  "version": "0.1.0",
+  "name": "lucky-llama",
+  "version": "1.0.0",
   "private": true,
+  "description": "Lucky Llama - Interactive decision-making game that makes random selection exciting! Stop overthinking and start choosing.",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
