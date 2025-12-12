@@ -8,6 +8,5 @@ The layout should be exactly like the Home Page and the Rolling Roullete to have
 I added the bottle.png in the public directory to use as the spinning bottle.
 
 ## Corrections
-1. Remove the directions. Game doesn need that.
-2. Make the bottle a bit bigger in the desktop view.
-3. Can we make the success message display the bottle and the direction it is pointing at? For exaple the image of the bottle is pointing at the east, the success messaeg will display the bottle in it pointing at the east as well.
+1. Make the bottle in the success message bigger and update the test in the success messgae. The test should be smaller than the bottle. The focus of the success message is to emphasize he bottle.
+2. Update the success message of the rolling roullete and the bitlhe bottle to match the size of the customize wheel modal in the rolling roullete

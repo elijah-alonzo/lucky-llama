@@ -77,7 +77,7 @@ export default function Bottle() {
                 <span style={{ color: '#fffd30' }}>Bottle</span>
               </h1>
               <p className="text-base text-gray-300 mb-8 max-w-lg leading-relaxed">
-                Digital spin the bottle for when you don't have a real bottle! Perfect for party games, icebreakers, and group activities.
+                Got no bottle? No worries, Blithe Bottle has you covered! Spin the virtual bottle anytime, anywhere.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -127,9 +127,9 @@ export default function Bottle() {
 
       {/* Result Modal */}
       {showResult && (
-        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div
-            className="w-full max-w-2xl rounded-3xl shadow-2xl p-12 relative animate-[modal-pop_0.4s_ease-out]"
+            className="w-full max-w-md rounded-2xl shadow-2xl p-6 relative animate-[modal-pop_0.4s_ease-out]"
             style={{ 
               backgroundColor: '#371843', 
               border: '4px solid #fffd30'
@@ -137,27 +137,18 @@ export default function Bottle() {
           >
             <button
               onClick={() => setShowResult(false)}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             
-            <div className="flex flex-col items-center justify-center mb-8">
-              <div className="text-center mb-6">
-                <h2 className="text-4xl font-semibold mb-3 text-white">
-                  Bottle Points
-                </h2>
-                <h3 className="text-5xl font-bold mb-3" style={{ color: '#fffd30' }}>
-                  {pointingDirection}
-                </h3>
-              </div>
-              
-              {/* Show bottle pointing in the direction */}
+            <div className="flex flex-col items-center justify-center mb-4">
+              {/* Show bottle pointing in the direction - emphasized */}
               <div className="mb-4">
                 <div 
-                  className="w-32 h-32 flex items-center justify-center"
+                  className="w-40 h-40 flex items-center justify-center"
                   style={{
                     transform: `rotate(${rotation}deg)`
                   }}
@@ -165,16 +156,21 @@ export default function Bottle() {
                   <Image
                     src="/bottle.png"
                     alt="Bottle pointing direction"
-                    width={120}
-                    height={120}
-                    className="object-contain drop-shadow-lg"
+                    width={150}
+                    height={150}
+                    className="object-contain drop-shadow-2xl"
                   />
                 </div>
               </div>
               
-              <p className="text-lg text-gray-200">
-                That's your direction!
-              </p>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold mb-2" style={{ color: '#fffd30' }}>
+                  {pointingDirection}
+                </h3>
+                <p className="text-sm text-gray-300">
+                  That's your direction!
+                </p>
+              </div>
             </div>
             
           </div>

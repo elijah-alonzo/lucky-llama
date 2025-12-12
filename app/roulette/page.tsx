@@ -133,9 +133,9 @@ export default function Roulette() {
 
       {/* Result Modal */}
       {showModal && (
-        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div
-            className="w-full max-w-2xl rounded-3xl shadow-2xl p-12 relative animate-[modal-pop_0.4s_ease-out] animate-[modal-glitter_2s_ease-in-out_infinite]"
+            className="w-full max-w-md rounded-2xl shadow-2xl p-6 relative animate-[modal-pop_0.4s_ease-out]"
             style={{ 
               backgroundColor: '#371843', 
               border: '4px solid #fffd30'
@@ -143,19 +143,19 @@ export default function Roulette() {
           >
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             
-            <div className="flex items-center justify-center mb-8">
+            <div className="flex items-center justify-center mb-4">
               <div className="text-center">
-                <h2 className="text-5xl font-semibold mb-3" style={{ color: '#fffd30' }}>
+                <h2 className="text-3xl font-semibold mb-2" style={{ color: '#fffd30' }}>
                   {winner}
                 </h2>
-                <p className="text-lg text-gray-200 font-base">
+                <p className="text-base text-gray-200">
                   has been selected!
                 </p>
               </div>
