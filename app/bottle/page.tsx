@@ -94,21 +94,16 @@ export default function Bottle() {
                 </button>
               </div>
 
-              {/* Current Direction */}
-              {pointingDirection && (
-                <div className="text-gray-300">
-                  Bottle is pointing: <span className="font-bold" style={{ color: '#fffd30' }}>{pointingDirection}</span>
-                </div>
-              )}
+
             </div>
 
             {/* Right Content - Bottle */}
             <div className="flex justify-center lg:justify-end w-full px-4 sm:px-0">
               <div className="relative w-full flex justify-center">
-                <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[500px] xl:max-w-[550px] aspect-square flex items-center justify-center">
+                <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[450px] lg:max-w-[550px] xl:max-w-[650px] aspect-square flex items-center justify-center">
                   {/* Spinning Bottle */}
                   <div 
-                    className={`w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex items-center justify-center`}
+                    className={`w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] flex items-center justify-center`}
                     style={{
                       transform: `rotate(${rotation}deg)`,
                       transition: isSpinning ? 'transform 3s cubic-bezier(0.23, 1, 0.32, 1)' : 'none'
@@ -117,31 +112,11 @@ export default function Bottle() {
                     <Image
                       src="/bottle.png"
                       alt="Spinning Bottle"
-                      width={300}
-                      height={300}
-                      className="object-contain drop-shadow-2xl"
+                      width={400}
+                      height={400}
+                      className="object-contain drop-shadow-2xl w-full h-full"
                       style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}
                     />
-                  </div>
-
-                  {/* Direction Indicators */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    {/* North */}
-                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white font-semibold text-lg">
-                      N
-                    </div>
-                    {/* South */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white font-semibold text-lg">
-                      S
-                    </div>
-                    {/* East */}
-                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white font-semibold text-lg">
-                      E
-                    </div>
-                    {/* West */}
-                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white font-semibold text-lg">
-                      W
-                    </div>
                   </div>
                 </div>
               </div>
@@ -169,18 +144,37 @@ export default function Bottle() {
               </svg>
             </button>
             
-            <div className="flex items-center justify-center mb-8">
-              <div className="text-center">
+            <div className="flex flex-col items-center justify-center mb-8">
+              <div className="text-center mb-6">
                 <h2 className="text-4xl font-semibold mb-3 text-white">
                   Bottle Points
                 </h2>
                 <h3 className="text-5xl font-bold mb-3" style={{ color: '#fffd30' }}>
                   {pointingDirection}
                 </h3>
-                <p className="text-lg text-gray-200">
-                  That's your direction!
-                </p>
               </div>
+              
+              {/* Show bottle pointing in the direction */}
+              <div className="mb-4">
+                <div 
+                  className="w-32 h-32 flex items-center justify-center"
+                  style={{
+                    transform: `rotate(${rotation}deg)`
+                  }}
+                >
+                  <Image
+                    src="/bottle.png"
+                    alt="Bottle pointing direction"
+                    width={120}
+                    height={120}
+                    className="object-contain drop-shadow-lg"
+                  />
+                </div>
+              </div>
+              
+              <p className="text-lg text-gray-200">
+                That's your direction!
+              </p>
             </div>
             
           </div>

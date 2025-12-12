@@ -129,7 +129,7 @@ export default function Home() {
               <div className="certification-content">
                 <h5 className="certification-title">Rolling Roulette</h5>
                 <p className="certification-description">
-                  A spinner that holds multiple text options. Perfect for making random selections from a list of choices.
+                  Build your own wheel, load it with options, and let the spin settle the score.
                 </p>
                 <Link href="/roulette" className="certification-button block text-center no-underline">
                   Play Now
