@@ -148,7 +148,7 @@ export default function Bottle() {
               {/* Show bottle pointing in the direction - emphasized */}
               <div className="mb-4">
                 <div 
-                  className="w-40 h-40 flex items-center justify-center"
+                  className="w-50 h-50 flex items-center justify-center"
                   style={{
                     transform: `rotate(${rotation}deg)`
                   }}
@@ -156,20 +156,20 @@ export default function Bottle() {
                   <Image
                     src="/bottle.png"
                     alt="Bottle pointing direction"
-                    width={150}
-                    height={150}
+                    width={250}
+                    height={250}
                     className="object-contain drop-shadow-2xl"
                   />
                 </div>
               </div>
               
               <div className="text-center">
+                <p className="text-sm text-gray-300">
+                  The bottle points at
+                </p>
                 <h3 className="text-2xl font-bold mb-2" style={{ color: '#fffd30' }}>
                   {pointingDirection}
                 </h3>
-                <p className="text-sm text-gray-300">
-                  That's your direction!
-                </p>
               </div>
             </div>
             
