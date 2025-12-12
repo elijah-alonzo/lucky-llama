@@ -173,11 +173,11 @@ export default function Home() {
               <div className="certification-content">
                 <h3 className="certification-title">Blithe Bottle</h3>
                 <p className="certification-description">
-                  Digital spin the bottle game. Perfect for party games and icebreakers with friends and groups.
+                  Got no bottle? No worries, Bilthe Bottle has you covered! Spin the virtual bottle anytime, anywhere!
                 </p>
-                <button className="certification-button" disabled>
-                  Coming Soon
-                </button>
+                <Link href="/bottle" className="certification-button block text-center no-underline">
+                  Play Now
+                </Link>
               </div>
             </div>
 
